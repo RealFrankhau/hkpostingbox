@@ -19,7 +19,7 @@
 
 ## 資料來源及更新
 
-- 郵箱資料由[香港郵政郵箱網頁](https://webapp.hongkongpost.hk/tc/about_us/network/street_posting_boxes2/index.html#list)使用的官方 API 提供：`https://webapp.hongkongpost.hk/api1/v1/postOffice/all-street-posting-box`
+- 郵箱資料由[香港郵政郵箱網頁](https://webapp.hongkongpost.hk/tc/about_us/network/street_posting_boxes2/index.html#list)使用的官方 API 提供：`https://webapp1.hongkongpost.hk/api1/v1/postOffice/all-street-posting-box`
 - 整理後的地圖資料存放在 `data/post-boxes.json`，包含郵筒位置及平日、星期六、星期日和公眾假期的收箱時間（來源有提供的時段才會顯示）
 - GitHub Actions 每月自動檢查並更新資料；亦可在 GitHub Actions 頁面手動執行 **Update postal-box data**。只有資料有變更時才會建立更新提交。
 - 本機可執行 `python extract_mailpost.py` 重新取得資料；此指令亦會更新 `mailpost.txt`。

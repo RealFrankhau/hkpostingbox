@@ -4,7 +4,7 @@ from urllib.request import Request, urlopen
 
 
 SOURCE_URL = (
-    "https://webapp.hongkongpost.hk/"
+    "https://webapp1.hongkongpost.hk/"
     "api1/v1/postOffice/all-street-posting-box"
 )
 DATA_PATH = Path("data/post-boxes.json")
