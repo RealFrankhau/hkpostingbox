@@ -15,7 +15,15 @@ def main():
     request = Request(
         SOURCE_URL,
         data=b"",
-        headers={"Content-Type": "application/json; charset=utf-8"},
+        headers={
+            "Content-Type": "application/json; charset=utf-8",
+            "Origin": "https://webapp.hongkongpost.hk",
+            "Referer": (
+                "https://webapp.hongkongpost.hk/tc/about_us/network/"
+                "street_posting_boxes2/index.html"
+            ),
+            "User-Agent": "Mozilla/5.0",
+        },
         method="POST",
     )
     with urlopen(request, timeout=60) as response:
