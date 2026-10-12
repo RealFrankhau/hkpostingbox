@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   update-data:
-    runs-on: ubuntu-24.04
+    runs-on: [self-hosted, Windows, X64]
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-python@v6
@@ -19,13 +19,24 @@ jobs:
       - name: Fetch and format postal-box data
         run: python extract_mailpost.py
       - name: Commit data when changed
+        shell: powershell
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/post-boxes.json mailpost.txt
-          if git diff --cached --quiet; then
+          git diff --cached --quiet
+          $diffExitCode = $LASTEXITCODE
+          if ($diffExitCode -eq 0) {
             echo "Postal-box data is already up to date."
-          else
+          } elseif ($diffExitCode -eq 1) {
             git commit -m "Update postal-box data"
+            if ($LASTEXITCODE -ne 0) {
+              exit $LASTEXITCODE
+            }
             git push
-          fi
+            if ($LASTEXITCODE -ne 0) {
+              exit $LASTEXITCODE
+            }
+          } else {
+            exit $diffExitCode
+          }
